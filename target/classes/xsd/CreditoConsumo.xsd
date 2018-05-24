@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified"
+            targetNamespace="http://creditosconsumo.core.coopeuch.cl"
+            xmlns:impl="http://creditosconsumo.core.coopeuch.cl" xmlns:intf="http://creditosconsumo.core.coopeuch.cl"
+            xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding"
+            xmlns:tns="creditosconsumo.core.coopeuch.cl/creditosconsumo"
+            xmlns:tns3="http://creditosconsumo.core.coopeuch.cl" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+            xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+            xmlns:wsi="http://ws-i.org/profiles/basic/2.0/xsd">
+  <xsd:complexType name="ConsultaDatosCreditosConsumo">
+    <xsd:sequence>
+      <xsd:element name="identificadorUsuario" nillable="true">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="numeroCredito" nillable="true" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DatosCreditosConsumo">
+    <xsd:sequence>
+      <xsd:element name="numCredito" nillable="true" type="xsd:long"/>
+      <xsd:element name="codMonedaCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="numCliente" nillable="true" type="xsd:int"/>
+      <xsd:element name="identificacionCliente" nillable="true" type="xsd:string"/>
+      <xsd:element name="nomCliente" nillable="true" type="xsd:string"/>
+      <xsd:element name="codBancoCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="codSucursalCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="nomSucursalCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="codCentroCosto" nillable="true" type="xsd:int"/>
+      <xsd:element name="nomCentroCosto" nillable="true" type="xsd:string"/>
+      <xsd:element name="codEjecutivo" nillable="true" type="xsd:string"/>
+      <xsd:element name="identificacionEjecutivo" nillable="true" type="xsd:string"/>
+      <xsd:element name="nomEjecutivo" nillable="true" type="xsd:string"/>
+      <xsd:element name="codigo" nillable="true" type="xsd:string"/>
+      <xsd:element name="codProducto" nillable="true" type="xsd:string"/>
+      <xsd:element name="descripcionProducto" nillable="true" type="xsd:string"/>
+      <xsd:element name="tipo" nillable="true" type="xsd:string"/>
+      <xsd:element name="descripcion" nillable="true" type="xsd:string"/>
+      <xsd:element name="tasaCredito" nillable="true" type="xsd:double"/>
+      <xsd:element name="fechaAperturaCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="fechaVencimientoCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="plazoCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="tipoPlazoCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="indicadorAval" nillable="true" type="xsd:string"/>
+      <xsd:element name="numCuentaCargos" nillable="true" type="xsd:long"/>
+      <xsd:element name="montoOrigCredito" nillable="true" type="xsd:double"/>
+      <xsd:element name="fechaUltPagoCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="montoCuotaCredito" type="xsd:double"/>
+      <xsd:element name="codigoEstadoCredito" type="xsd:string"/>
+      <xsd:element name="rutConyuge" type="xsd:string"/>
+      <xsd:element name="nombreConyuge" type="xsd:string"/>
+      <xsd:element name="fechaPagoProxCuotaVigente" type="xsd:string"/>
+      <xsd:element name="numeroCuotasPagadas" type="xsd:string"/>
+      <xsd:element name="valorUFFechApertCredito" type="xsd:double"/>
+      <xsd:element name="estadoCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="planPagoCredito" nillable="true" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultaPlanPagoCreditosConsumo">
+    <xsd:sequence>
+      <xsd:element name="identificadorUsuario" nillable="true">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="numeroCredito" nillable="true">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="fechaUltimaCuotaRecibida" nillable="true">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="estadoCuota">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string"/>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RespuestaPlanPagoCreditosConsumo">
+    <xsd:sequence>
+      <xsd:element name="nombreFormato" nillable="true" type="xsd:string"/>
+      <xsd:element name="numCredito" nillable="true" type="xsd:long"/>
+      <xsd:element name="codMonedaCredito" nillable="true" type="xsd:string"/>
+      <xsd:element name="fechaVencUltimaCuota" nillable="true" type="xsd:string"/>
+      <xsd:element name="indicadorCuotas" nillable="true" type="xsd:string"/>
+      <xsd:element name="numCuotasEnviadas" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="detalleCuotas" nillable="true" type="impl:ListadoDetalleCuotas"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="error" type="impl:error"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultaDatosSolicitudCredito">
+    <xsd:sequence>
+      <xsd:element name="identificadorUsuario" nillable="true">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="numeroCredito" nillable="true">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long"/>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RespuestaDatosSolicitudCredito">
+    <xsd:sequence>
+      <xsd:element name="formato" nillable="true" type="xsd:string"/>
+      <xsd:element name="numeroCredito" nillable="true" type="xsd:long"/>
+      <xsd:element name="codMoneda" nillable="true" type="xsd:string"/>
+      <xsd:element name="numeroSolicitud" nillable="true" type="xsd:long"/>
+      <xsd:element name="fechaIngreso" nillable="true" type="xsd:string"/>
+      <xsd:element name="codSucursal" nillable="true" type="xsd:string"/>
+      <xsd:element name="desSucursal" nillable="true" type="xsd:string"/>
+      <xsd:element name="maxEstado" nillable="true" type="xsd:string"/>
+      <xsd:element name="valorCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoSeguro" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoCredito" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoProducto" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoLiquido" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoCheques" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoTarjetas" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoDevolucion" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoNotariales" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoDesgravamen" nillable="true" type="xsd:double"/>
+      <xsd:element name="codFormaPago" nillable="true" type="xsd:string"/>
+      <xsd:element name="indCreditosAsociados" nillable="true" type="xsd:string"/>
+      <xsd:element name="codConvenio" nillable="true" type="xsd:string"/>
+      <xsd:element name="desConvenio" nillable="true" type="xsd:string"/>
+      <xsd:element name="rutVendedor" nillable="true" type="xsd:string"/>
+      <xsd:element name="nombreVendedor" nillable="true" type="xsd:string"/>
+      <xsd:element name="sucursalVendedor" nillable="true" type="xsd:string"/>
+      <xsd:element name="codUsuarioIngreso" nillable="true" type="xsd:string"/>
+      <xsd:element name="rutUsuarioIngreso" nillable="true" type="xsd:string"/>
+      <xsd:element name="nombreUsuarioIngreso" nillable="true" type="xsd:string"/>
+      <xsd:element name="codUsuarioCurse" nillable="true" type="xsd:string"/>
+      <xsd:element name="rutUsuarioCurse" nillable="true" type="xsd:string"/>
+      <xsd:element name="nombreUsuarioCurse" nillable="true" type="xsd:string"/>
+      <xsd:element name="codUsuarioEvaluacion" nillable="true" type="xsd:string"/>
+      <xsd:element name="rutUsuarioEvaluacion" nillable="true" type="xsd:string"/>
+      <xsd:element name="nombreUsuarioEvaluacion" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="error" type="impl:error"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultaDatosChequesATercero">
+    <xsd:sequence>
+      <xsd:element name="identificadorUsuario" nillable="true">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="numeroCredito" nillable="true">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ultimoChequeConsultado" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RespuestaDatosChequesATercero">
+    <xsd:sequence>
+      <xsd:element name="formato" nillable="true" type="xsd:string"/>
+      <xsd:element name="numeroCredito" nillable="true" type="xsd:long"/>
+      <xsd:element name="codMoneda" nillable="true" type="xsd:string"/>
+      <xsd:element name="ultimoChequeConsultado" nillable="true" type="xsd:string"/>
+      <xsd:element name="indExistencia" nillable="true" type="xsd:string"/>
+      <xsd:element name="numChequesEnviados" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="detalleCheques" nillable="true"
+                   type="impl:ListadoChequesATerceros"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="error" type="impl:error"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DetalleCuota">
+    <xsd:sequence>
+      <xsd:element name="fechaVencimientoCuota" nillable="true" type="xsd:string"/>
+      <xsd:element name="fechaPagoCuota" nillable="true" type="xsd:string"/>
+      <xsd:element name="montoCapitalPagoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoInteresesPagoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoMoraPagoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoDeduccionesPagoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoImpuestosPagoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoComisionesPagoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoIvaPagoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoPagoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoCapitalPagadoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoInteresesPagadoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoMoraPagadoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoDeduccionesPagadoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoImpuestosPagadoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoComisionesPagadoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoIvaPagadoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="montoPagadoCuota" nillable="true" type="xsd:double"/>
+      <xsd:element name="saldoCreditoDespuesPago" type="xsd:double"/>
+      <xsd:element name="valorUFFechaPagoCuota" type="xsd:double"/>
+      <xsd:element name="diasMoraCuotaVencida" type="xsd:string"/>
+      <xsd:element name="estadoCuotaCredito" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DetalleChequesATercero">
+    <xsd:sequence>
+      <xsd:element name="numeroSecuenciaCheque" nillable="true" type="xsd:string"/>
+      <xsd:element name="rutEmision" nillable="true" type="xsd:string"/>
+      <xsd:element name="nombreEmision" nillable="true" type="xsd:string"/>
+      <xsd:element name="numeroCuenta" nillable="true" type="xsd:long"/>
+      <xsd:element name="numeroCheque" nillable="true" type="xsd:long"/>
+      <xsd:element name="montoCheque" nillable="true" type="xsd:double"/>
+      <xsd:element name="codEstadoImpresion" nillable="true" type="xsd:string"/>
+      <xsd:element name="codUsuarioImpresion" nillable="true" type="xsd:string"/>
+      <xsd:element name="secursalImpresion" nillable="true" type="xsd:string"/>
+      <xsd:element name="fechaImpresion" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfDetalleCuotas">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="DetalleCuotas" nillable="true" type="impl:DetalleCuota"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="error">
+    <xsd:sequence>
+      <xsd:element name="formato" type="xsd:string"/>
+      <xsd:element name="identificador" type="xsd:string"/>
+      <xsd:element name="correlativo" type="xsd:string"/>
+      <xsd:element name="numeroErrores" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="listadoErrores">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="errores" nillable="true" type="impl:detalleError"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="detalleError">
+    <xsd:sequence>
+      <xsd:element name="codigoError" type="xsd:string"/>
+      <xsd:element name="descripcionError" type="xsd:string"/>
+      <xsd:element name="origen" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="faultMessage">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="errores" type="impl:error"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDatosCreditosConsumoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="salida" type="impl:RespuestaDatosCreditosConsumo"></xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDatosCreditosConsumo">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="entrada" nillable="true" type="impl:ConsultaDatosCreditosConsumo"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerPlanPagoCreditosConsumoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="salida" nillable="true" type="impl:RespuestaPlanPagoCreditosConsumo"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerPlanPagoCreditosConsumo">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="entrada" nillable="true" type="impl:ConsultaPlanPagoCreditosConsumo"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDatosPagoCreditos">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="entrada" nillable="true" type="impl:consultaEntradaDatosPago"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDatosPagoCreditosResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="salida" nillable="true" type="impl:resultadoSalidaDatosPago"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDetallePrepagosCredito">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="entrada" type="impl:ConsultaDetallePrepagosCredito"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDetallePrepagosCreditoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="salida" type="impl:RespuestaDetallePrepagosCredito"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDatosSolicitudCreditos">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="entrada" nillable="true" type="impl:ConsultaDatosSolicitudCredito"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDatosSolicitudCreditosResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="salida" nillable="true" type="impl:RespuestaDatosSolicitudCredito"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDatosChequesATercero">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="entrada" nillable="true" type="impl:ConsultaDatosChequesATercero"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerDatosChequesATerceroResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="salida" nillable="true" type="impl:RespuestaDatosChequesATercero"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="DeudaTotalCredito">
+    <xsd:sequence>
+      <xsd:element name="montoTotalDeudaTotal" type="xsd:double"/>
+      <xsd:element name="montoCapitalDeudaTotal" type="xsd:double"/>
+      <xsd:element name="moptoReajusteDeudaTotal" type="xsd:double"/>
+      <xsd:element name="montoInteresesDeudaTotal" type="xsd:double"/>
+      <xsd:element name="montoMoraDeudaTotal" type="xsd:double"/>
+      <xsd:element name="montoOtrosCargosDeudaTotal" type="xsd:double"/>
+      <xsd:element name="montoComisionesDeudaTotal" type="xsd:double"/>
+      <xsd:element name="montoImpuestoDeudaTotal" type="xsd:double"/>
+      <xsd:element name="montoDeduccionesDeudaTotal" type="xsd:double"/>
+      <xsd:element name="montoIvaDeudaTotal" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RespuestaDatosCreditosConsumo">
+    <xsd:sequence>
+      <xsd:element name="nombreFormato" type="xsd:string"/>
+      <xsd:element name="datosCreditosConsumo" type="impl:DatosCreditosConsumo"/>
+      <xsd:element name="deudaTotalCredito" type="impl:DeudaTotalCredito"/>
+      <xsd:element name="deudaTotalVencidaCredito" type="impl:DeudaTotalVencidaCredito"/>
+      <xsd:element name="proximaCuotaVigenteCredito" type="impl:ProximaCuotaVigenteCredito"/>
+      <xsd:element name="error" type="impl:error"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DeudaTotalVencidaCredito">
+    <xsd:sequence>
+      <xsd:element name="montoTotalDeudaVencida" type="xsd:double"/>
+      <xsd:element name="montoCapitalDeudaVencida" type="xsd:double"/>
+      <xsd:element name="montoReajustesDeudaVencida" type="xsd:double"/>
+      <xsd:element name="montoInteresesDeudaVencida" type="xsd:double"/>
+      <xsd:element name="montoMoraDeudaVencida" type="xsd:double"/>
+      <xsd:element name="montoOtrosCargosDeudaVencida" type="xsd:double"/>
+      <xsd:element name="montoComisionesDeudaVencida" type="xsd:double"/>
+      <xsd:element name="montoImpuestoDeudaVencida" type="xsd:double"/>
+      <xsd:element name="montoDeduccionesDeudaVencida" type="xsd:double"/>
+      <xsd:element name="montoIvaDeudaVencida" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ProximaCuotaVigenteCredito">
+    <xsd:sequence>
+      <xsd:element name="montoTotalCuotaVigente" type="xsd:double"/>
+      <xsd:element name="montoCapitalCuotaVigente" type="xsd:double"/>
+      <xsd:element name="montoReajustesCuotaVigente" type="xsd:double"/>
+      <xsd:element name="montoInteresesCuotaVigente" type="xsd:double"/>
+      <xsd:element name="montoMoraCuotaVigente" type="xsd:double"/>
+      <xsd:element name="montoOtrosCargosCuotaVigente" type="xsd:double"/>
+      <xsd:element name="montoComisionesCuotaVigente" type="xsd:double"/>
+      <xsd:element name="montoImpuestoCuotaVigente" type="xsd:double"/>
+      <xsd:element name="montoDeduccionesCuotaVigente" type="xsd:double"/>
+      <xsd:element name="montoIvaCuotaVigente" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="consultaEntradaDatosPago">
+    <xsd:sequence>
+      <xsd:element name="identificadorUsuario">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="idProducto">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="estadoCuota">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="A|a"/>
+            <xsd:pattern value="P|p"/>
+            <xsd:pattern value="V|v"/>
+            <xsd:pattern value="T|t"/>
+            <xsd:pattern value=""/>
+            <xsd:pattern value=" "/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="fechaUltimaCuotaRecibida">
+        <xsd:simpleType>
+          <xsd:restriction base="impl:Fecha"/>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="resultadoSalidaDatosPago">
+    <xsd:sequence>
+      <xsd:element name="datosCreditos" type="impl:RespuestaDatosCreditosConsumo"/>
+      <xsd:element name="planPagoCreditos" type="impl:RespuestaPlanPagoCreditosConsumo"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="error" type="impl:error"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ListadoDetalleCuotas">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="detalleCuotas" type="impl:DetalleCuota"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ListadoChequesATerceros">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="DetalleChequesATercero"
+                   type="impl:DetalleChequesATercero"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultaDetallePrepagosCredito">
+    <xsd:sequence>
+      <xsd:element name="identificadorUsuario">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="numeroCredito">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="numUltPrepagoRecibido" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RespuestaDetallePrepagosCredito">
+    <xsd:sequence>
+      <xsd:element name="nombreFormato" type="xsd:string"/>
+      <xsd:element name="numeroCredito" type="xsd:long"/>
+      <xsd:element name="codigoMonedaCredito" type="xsd:string"/>
+      <xsd:element name="numUltAbonoCreditoEnviado" type="xsd:string"/>
+      <xsd:element name="indicadorAbonosCreditPorEnv" type="xsd:string"/>
+      <xsd:element name="numAbonosCreditosEnviados" type="xsd:string"/>
+      <xsd:element name="detallePrepagosCredito" type="impl:DetallePrepagosCredito"/>
+      <xsd:element name="error" type="impl:error"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DetallePrepagosCredito">
+    <xsd:sequence>
+      <xsd:element name="numPrepagoCredito" type="xsd:string"/>
+      <xsd:element name="fechaPrepago" type="xsd:string"/>
+      <xsd:element name="montoTotalPrepago" type="xsd:double"/>
+      <xsd:element name="montoPrepagoCapital" type="xsd:double"/>
+      <xsd:element name="numeroCuotasPrepagadas" type="xsd:string"/>
+      <xsd:element name="numCuotasPorPagarDespPrep" type="xsd:string"/>
+      <xsd:element name="saldoCreditoDespuesPrepago" type="xsd:double"/>
+      <xsd:element name="nuevoValorCuotaDespPrepago" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="traerSegurosCredito">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="entrada" type="impl:ConsultaSegurosCredito"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="traerSegurosCreditoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="salida" type="impl:RespuestaSegurosCredito"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="ConsultaSegurosCredito">
+    <xsd:sequence>
+      <xsd:element name="idUsuario">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="numCredito">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:long"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="numRegistro">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int"/>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RespuestaSegurosCredito">
+    <xsd:sequence>
+      <xsd:element name="formato" type="xsd:string"/>
+      <xsd:element name="numCredito" type="xsd:long"/>
+      <xsd:element name="codMoneda" type="xsd:string"/>
+      <xsd:element name="numUltimoReg" type="xsd:int"/>
+      <xsd:element name="indMasReg" type="xsd:string"/>
+      <xsd:element name="numRegNoFacturados" type="xsd:string"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="detalleSeguros" type="impl:detalleSeguros"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="detalleSeguros">
+    <xsd:sequence>
+      <xsd:element name="codCiaSeguros" type="xsd:string"></xsd:element>
+      <xsd:element name="rutCiaSeguros" type="xsd:string"></xsd:element>
+      <xsd:element name="nombreCiaSeguros" type="xsd:string"></xsd:element>
+      <xsd:element name="codMonedaMontoAseg" type="xsd:string"></xsd:element>
+      <xsd:element name="montoAsegurado" type="xsd:double"></xsd:element>
+      <xsd:element name="codMonedaValorPrima" type="xsd:string"></xsd:element>
+      <xsd:element name="valorPrimaSeguro" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:simpleType name="Fecha">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="([1-2][0-9][0-9][0-9](01|02|03|04|05|06|07|08|09|10|11|12)(01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31))|00000000)"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

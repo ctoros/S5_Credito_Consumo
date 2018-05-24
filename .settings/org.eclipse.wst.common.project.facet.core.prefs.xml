@@ -1,0 +1,7 @@
+<root>
+  <facet id="jpt.jaxb">
+    <node name="classgen">
+      <attribute name="package" value="cl.coopeuch.core.creditosConsumo.creditosconsumo"/>
+    </node>
+  </facet>
+</root>
