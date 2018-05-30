@@ -4,7 +4,7 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.mycompany</groupId>
+	<groupId>com.syachile</groupId>
 	<artifactId>camel-blueprint</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>bundle</packaging>
@@ -19,8 +19,8 @@
 	</licenses>
 	<properties>
 		<camel.version>2.17.0.redhat-630187</camel.version>
-		<version.maven-bundle-plugin>3.2.0</version.maven-bundle-plugin>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<version.maven-bundle-plugin>3.2.0</version.maven-bundle-plugin>
 		<jboss.fuse.bom.version>6.3.0.redhat-187</jboss.fuse.bom.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -45,6 +45,10 @@
 			<artifactId>camel-blueprint</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jackson</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
@@ -67,6 +71,16 @@
 			<artifactId>asm-commons</artifactId>
 			<version>5.0.3</version>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-xmljson</artifactId>
+			<version>2.10.0</version>
+		</dependency>
+		<dependency>
+			<groupId>xom</groupId>
+			<artifactId>xom</artifactId>
+			<version>1.2.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -126,6 +140,11 @@
 			<artifactId>camel-cxf</artifactId>
 			<version>2.17.0.redhat-630187</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jacksonxml</artifactId>
+			<version>2.17.0.redhat-630187</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
@@ -182,6 +201,32 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>3.1.9</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+						<configuration>
+							<sourceRoot>${basedir}/src/main/java</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/Productos.wsdl</wsdl>
+									<wsdlLocation>classpath:wsdl/Productos.wsdl</wsdlLocation>
+									<extraargs>
+										<extraarg>-impl</extraarg>
+									</extraargs>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>

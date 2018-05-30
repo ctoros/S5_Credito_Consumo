@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.productos.cl"
+            targetNamespace="http://www.productos.cl" elementFormDefault="qualified">
+  <xsd:element name="productosRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="producto" maxOccurs="unbounded" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="id">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:int"/>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="tipo">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string"/>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="valor">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:int"/>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="productosResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="existe">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:boolean"/>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

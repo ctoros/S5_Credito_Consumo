@@ -2,15 +2,15 @@ package com.mycompany.rest;
 
 import javax.ws.rs.*;
 
+import org.apache.cxf.jaxrs.ext.multipart.Multipart;
+
 @Path("/restservice/")
-public class GetQuoteResource {
+@Produces
+@Consumes
+public interface GetQuoteResource {
 	
 	@POST
-	@Path("/getQuote/")
-	@Produces("application/json")
-	public String getQuote(String input) {
-		return null;
-	}
-	
-
+	@Path("/execute/")
+//	@Produces("application/xml")
+	public String getQuote(@Multipart String  input);
 }

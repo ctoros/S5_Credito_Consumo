@@ -1,17 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd                            http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
-<!-- 	<bean id="aggregateOrdersBean" -->
-<!-- 		class="com.mycompany.beans.AggregateOrders" /> -->
-	<camelContext id="_context1"
-		xmlns="http://camel.apache.org/schema/blueprint">
-		<route customId="true" id="_route1">
-<!-- 			<from id="_from1" uri="cxfrs:bean:restFrontend" /> -->
-			<from id="_from1" uri="cxfrs:http://localhost:9092/route?resourceClasses=com.mycompany.rest.GetQuoteResource" />
-			<log id="_log1" message="Rest endpoint body:  ${body}" />
-		</route>
-	</camelContext>
+    xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd                            http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+    <!-- <bean id="aggregateOrdersBean" -->
+    <!-- class="com.mycompany.beans.AggregateOrders" /> -->
+    <bean class="com.mycompany.rest.HeaderCXF" id="HeaderBean" scope="singleton"/>
+    <cxf:cxfEndpoint address="http://localhost:8181/cxf/ServiciosProductos"
+        id="toProductosEndPoint" serviceClass="com.oracle.xmlns.servicebusapplication.sbproject.productos.ExecutePtt"/>
+    <camelContext id="_context1" xmlns="http://camel.apache.org/schema/blueprint">
+        <route customId="true" id="_route1">
+            <from id="_from1" uri="cxfrs:http://localhost:9092/route?resourceClasses=com.mycompany.rest.GetQuoteResource"/>
+            <removeHeaders id="removeHeadersMensajeSocio" pattern="CamelHttp*"/>
+            <log id="_log1" message="Rest endpoint body:  ${body}"/>
+            <log id="_log22" message="llego a ruta2 ${headers}"/>
+            <unmarshal id="_unmarshal1">
+                <xmljson/>
+            </unmarshal>
+            <log id="log" logName="antesDeEnrich" message="************************ANTES DE DIRECT RUTA 1: ${body}">
+                <description>antes</description>
+            </log>
+            <toD id="_to1" uri="direct:${header.operationName}"/>
+            <log id="_log3" message="************************FIN RUTA 1:${body}"/>
+        </route>
+        <route id="_route2">
+            <!--             <toD id="_to3" uri="cxf:http://localhost:8181/cxf/ServiciosProductos"/> -->
+            <from id="_to2" uri="direct:getQuote"/>
+            <removeHeaders id="removeHeadersMensajeSocio1" pattern="CamelHttp*"/>
+            <log id="_log5" message="***********************RUTA 2 DESPUES DE DIRECT: ${body}"/>
+            <convertBodyTo id="_convertBodyTo1" type="String"/>
+            <setHeader headerName="entrada" id="_setHeader1">
+                <xpath>//o/producto</xpath>
+            </setHeader>
+            <log id="_log2" message="*************************DESPUES DE SET HEADER RUTA 2: ${body}"/>
+            <process id="_process1" ref="HeaderBean"/>
+            <log id="_log6" message="DESPUES DE BEAN:${body}"/>
+            <setHeader headerName="operationName" id="_setHeader2">
+                <constant>execute</constant>
+            </setHeader>
+            <setHeader headerName="operationNamespace" id="_setHeader3">
+                <constant>http://xmlns.oracle.com/ServiceBusApplication/SBProject/Productos</constant>
+            </setHeader>
+            <toD id="_to4" uri="cxf:toProductosEndPoint?dataFormat=MESSAGE"/>
+            <log id="_log4" message="************************FIN RUTA2: ${body}"/>
+        </route>
+    </camelContext>
 </blueprint>

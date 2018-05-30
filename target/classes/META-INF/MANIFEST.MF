@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1527192194601
+Bnd-LastModified: 1527693752423
 Build-Jdk: 1.8.0_161
 Built-By: ctoro
 Bundle-Blueprint: OSGI-INF/blueprint/blueprint.xml
@@ -10,8 +10,14 @@ Bundle-Name: Empty Camel Blueprint Example [S5_Credito_Consumo]
 Bundle-SymbolicName: S5_Credito_Consumo
 Bundle-Version: 1.0.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
-Export-Package: com.mycompany.rest;uses:="javax.ws.rs";version="1.0.0"
-Import-Package: javax.ws.rs;version="[2.0,3)",org.osgi.service.blueprint
- ;version="[1.0.0,2.0.0)"
+Export-Package: cl.productos;version="1.0.0";uses:="javax.xml.bind.annot
+ ation",com.mycompany.rest;version="1.0.0";uses:="javax.ws.rs,org.apache
+ .camel,org.apache.cxf.jaxrs.ext.multipart",com.oracle.xmlns.servicebusa
+ pplication.sbproject.productos;version="1.0.0";uses:="cl.productos,java
+ x.jws,javax.jws.soap,javax.xml.bind.annotation"
+Import-Package: cl.productos;version="[1.0,2)",javax.jws,javax.jws.soap,
+ javax.ws.rs;version="[2.0,3)",javax.xml.bind.annotation;version="[2.2,3
+ )",org.apache.camel;version="[2.17,3)",org.apache.cxf.jaxrs.ext.multipa
+ rt;version="[3.1,4)",org.osgi.service.blueprint;version="[1.0.0,2.0.0)"
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Tool: Bnd-3.2.0.201605172007
